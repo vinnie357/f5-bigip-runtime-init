@@ -22,7 +22,7 @@
 # VERSION=$(cat ${MAINDIR}/package.json | jq .version -r)
 
 NAME="f5-bigip-runtime-init"
-VERSION="0.9.0"
+VERSION="demo"
 SVC_ACCOUNT="f5devcentral"
 
 # usage: logger "log message"
