@@ -701,7 +701,7 @@ publish_to_github:
         - echo 'completed publishing to github'
 
 
-trigger_template_tests:
+trigger_downstream_templates_tests:
     stage: release
     only:
         variables:
