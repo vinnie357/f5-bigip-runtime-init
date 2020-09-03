@@ -20,11 +20,8 @@ stages:
 
 before_script:
     - *helpers
-    - VERSION=$(grep version package.json | awk -F \" '{print $4}')
-    - RELEASE=$(grep release package.json | awk -F \" '{print $4}')
 
 variables:
-    # azure vars - normalize env var options between ansible and terraform
     AZURE_TENANT: "$AZURE_TENANT_ID"
     AZURE_SECRET: "$AZURE_CLIENT_SECRET"
     ARM_CLIENT_ID: "$AZURE_CLIENT_ID"
@@ -41,6 +38,7 @@ variables:
     TF_VAR_AZURE_BIGIP_VERSION: "$AZURE_BIGIP_VERSION"
     GIT_SECRETS_VERSION: '1.3.0'
     GIT_SECRETS_PKG_URL: "https://github.com/awslabs/git-secrets/archive/${GIT_SECRETS_VERSION}.tar.gz"
+
 
 # Cleanup development RPM's on CDN when branch no longer present on gitlab
 cleanup_publish_rpms_dev_cdn:
@@ -692,7 +690,7 @@ publish_rpms_cdn:
 publish_to_github:
     stage: release_publish_github
     only:
-      - /(^release-(\d+\.){1,3}(\d)?$)/
+      - /(^release-(\d+\.){1,2}(\d)-(\d+)?$)/
     script:
         # Execute Relaese script to push source to github repo
         - echo 'completed publishing to github'
@@ -701,11 +699,10 @@ publish_to_github:
 trigger_downstream_templates_tests:
     stage: release_template_tests
     only:
-      - /(^release-(\d+\.){1,3}(\d)?$)/
+      - /(^release-(\d+\.){1,2}(\d)-(\d+)?$)/
     variables:
         RELEASE_TEMPLATE_TESTS: "true"
-        VERSION: $VERSION
-        RELEASE: $RELEASE
+        VERSION: $CI_COMMIT_REF_NAME
     trigger:
         project: cloudsolutions/f5-cloud-factory
         branch: ESECLDTPLT-1774
