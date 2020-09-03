@@ -701,7 +701,7 @@ trigger_downstream_templates_tests:
     only:
       - /(^release-(\d+\.){1,2}(\d)-(\d+)?$)/
     variables:
-        RELEASE_TEMPLATE_TESTS: "true"
+        RELEASE_RUNTIME_INIT_TESTS: "true"
         VERSION: $CI_COMMIT_REF_NAME
     trigger:
         project: cloudsolutions/f5-cloud-factory
