@@ -20,8 +20,8 @@ stages:
 
 before_script:
     - *helpers
-    - VERSION=$(cat package.json | jq -r ".version")
-    - RELEASE=$(cat package.json | jq -r ".release")
+    - VERSION=$(grep version package.json | awk -F \" '{print $4}')
+    - RELEASE=$(grep release package.json | awk -F \" '{print $4}')
 
 variables:
     # azure vars - normalize env var options between ansible and terraform
