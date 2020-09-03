@@ -99,16 +99,16 @@ test_audit:
             - $CLEANUP_DEVELOP_CDN == "true"
 
 # run unit tests
-unit_tests:
-    stage: test
-    script:
-        - npm install
-        - npm run test
-    tags:
-        - cm-official-docker-executor
-    except:
-        variables:
-            - $CLEANUP_DEVELOP_CDN == "true"
+#unit_tests:
+#    stage: test
+#    script:
+#        - npm install
+#        - npm run test
+#    tags:
+#        - cm-official-docker-executor
+#    except:
+#        variables:
+#            - $CLEANUP_DEVELOP_CDN == "true"
 
 # check for disallowed content in all files, this supplements
 # the native pre-receive push rules built into GitLab for secrets
