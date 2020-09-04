@@ -61,16 +61,14 @@ git push --tags
 echo "Creating release"
 git config --global github.token $GIT_HUB_API_TOKEN_AK
 version=$RELEASE_VERSION
-text="This is temp text"
-branch=$(git rev-parse --abbrev-ref HEAD)
-repo_full_name=$(git config --get remote.origin.url | sed 's/.*:\/\/github.com\///;s/.git$//')
+text="This is test Release for Runtime Init"
 
 generate_post_data()
 {
   cat <<EOF
 {
   "tag_name": "$version",
-  "target_commitish": "$branch",
+  "target_commitish": "develop",
   "name": "$version",
   "body": "$text",
   "draft": false,
@@ -79,6 +77,6 @@ generate_post_data()
 EOF
 }
 
-echo "Create release $version for repo: $repo_full_name branch: $branch"
-curl --data "$(generate_post_data)" "https://api.github.com/repos/$repo_full_name/releases?access_token=$GIT_HUB_API_TOKEN_AK"
+echo "Create release $version"
+curl -X POST -d "$(generate_post_data)" "https://api.github.com/repos/f5devcentral/f5-bigip-runtime-init/releases?access_token=$GIT_HUB_API_TOKEN_AK"
 
