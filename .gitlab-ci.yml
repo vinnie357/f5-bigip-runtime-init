@@ -8,6 +8,7 @@ stages:
     - functional_test_init
     - functional_test_execute
     - functional_test_cleanup
+    - publish
     - release_publish
     - release_trigger_template_tests
 
