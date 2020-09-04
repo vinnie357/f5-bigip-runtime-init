@@ -51,7 +51,7 @@ git config --global github.token $GIT_HUB_API_TOKEN_AK
 
 echo "Getting release info"
 release_description=$(curl -sk --header "PRIVATE-TOKEN: $GITLAB_PRIVATE_TOKEN_AK" "https://${GITLAB_API_URL_RUNTIME_INIT}/releases/$CI_COMMIT_REF_NAME" | jq .description)
-
+echo "Release description: $release_description"
 version=$RELEASE_VERSION
 
 generate_post_data()
