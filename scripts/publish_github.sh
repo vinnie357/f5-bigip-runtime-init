@@ -26,11 +26,16 @@ echo "Cloning projects"
 # Create temp dir
 mkdir -p ./release/github/ && cd ./release/github/
 git clone git@github.com:f5devcentral/f5-bigip-runtime-init.git
+echo 'Completed cloning github repo'
+cd ./f5-bigip-runtime-init.git
+echo 'DEBUG CHECKING'
+ls -la
+echo 'DEBUG '
 find . ! -name .git -delete
-cd ../../
+ls -la
+cd ../../../
 pwd
 ls -la
-ls -la ./release/github/f5-bigip-runtime-init/
 cp -R ./src ./release/github/f5-bigip-runtime-init/
 cp -R ./examples ./release/github/f5-bigip-runtime-init/
 cp .gitignore ./release/github/f5-bigip-runtime-init/
