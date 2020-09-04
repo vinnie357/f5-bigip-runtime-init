@@ -53,7 +53,6 @@ echo "Getting release info"
 release_description=$(curl -sk --header "PRIVATE-TOKEN: $GITLAB_PRIVATE_TOKEN_AK" "https://${GITLAB_API_URL_RUNTIME_INIT}/releases/$CI_COMMIT_REF_NAME" | jq .description)
 
 version=$RELEASE_VERSION
-text="This is test Release for Runtime Init"
 
 generate_post_data()
 {
@@ -62,7 +61,7 @@ generate_post_data()
   "tag_name": "$version",
   "target_commitish": "develop",
   "name": "$version",
-  "body": "$release_description",
+  "body": $release_description,
   "draft": false,
   "prerelease": false
 }
