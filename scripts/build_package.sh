@@ -2,7 +2,7 @@
 
 MAINDIR="$(dirname $0)/.."
 NAME=$(cat ${MAINDIR}/package.json | jq .name -r)
-CLOUDS=(azure aws gcp all)
+CLOUDS=(azure)
 COMMON_DEPENDENCIES=$(cat ${MAINDIR}/package.json | jq -r ".dependencyMap.common")
 VERSION=$(cat ${MAINDIR}/package.json | jq -r ".version")
 RELEASE=$(cat ${MAINDIR}/package.json | jq -r ".release")

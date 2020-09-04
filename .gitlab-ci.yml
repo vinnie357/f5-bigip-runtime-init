@@ -139,7 +139,7 @@ build_package:
         # install node dependencies
         - npm install
         # build package artifact
-        #- npm run build --uncomment
+        - npm run build
     tags:
         - cm-official-docker-executor
     artifacts:
