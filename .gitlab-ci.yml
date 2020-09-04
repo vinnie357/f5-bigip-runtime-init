@@ -98,7 +98,7 @@ test_audit:
         variables:
             - $CLEANUP_DEVELOP_CDN == "true"
 
-# run unit tests
+# run unit tests --uncomment
 #unit_tests:
 #    stage: test
 #    script:
@@ -139,7 +139,7 @@ build_package:
         # install node dependencies
         - npm install
         # build package artifact
-        #- npm run build
+        #- npm run build --uncomment
     tags:
         - cm-official-docker-executor
     artifacts:
@@ -662,7 +662,7 @@ publish_rpms_cdn:
             - $CI_COMMIT_MESSAGE =~ /smart:run_publish_cdn/
     except:
         variables:
-            - $CI_COMMIT_REF_NAME != "master"
+            #- $CI_COMMIT_REF_NAME != "master"  --uncomment
             - $RUN_FUNCTIONAL_TESTS == "true"
             - $CLEANUP_DEVELOP_CDN == "true"
     script:
