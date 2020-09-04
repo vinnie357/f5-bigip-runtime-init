@@ -10,6 +10,17 @@ then
 fi
 
 GIT_TAG=$1
+echo "RELEASE TAG: $GIT_TAG"
+
+echo "Configuring SSH"
+eval $(ssh-agent -s)
+test "$GIT_SSH_USER_PRIVATE_KEY" && (echo "$GIT_SSH_USER_PRIVATE_KEY" | tr -d '\r' | ssh-add -)
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+echo "$GIT_SSH_USER_PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
+echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+git config user.name $GITLAB_USER_LOGIN
+git config user.email $GITLAB_USER_EMAIL
 
 echo "Cloning projects"
 # Create temp dir
