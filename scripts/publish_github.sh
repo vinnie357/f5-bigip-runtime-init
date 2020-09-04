@@ -61,7 +61,7 @@ git push --tags
 echo "Creating release"
 git config --global github.token $GIT_HUB_API_TOKEN_AK
 version=$RELEASE_VERSION
-text="This is test Release for Runtime Init"
+text="$CI_COMMIT_MESSAGE"
 
 generate_post_data()
 {
