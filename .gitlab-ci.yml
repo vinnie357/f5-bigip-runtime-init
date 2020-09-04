@@ -656,10 +656,6 @@ publish_rpms_cdn:
     stage: release_publish
     only:
         - /(^publish-(\d+\.){1,2}(\d)-(\d+)?$)/
-    except:
-        variables:
-            - $RUN_FUNCTIONAL_TESTS == "true"
-            - $CLEANUP_DEVELOP_CDN == "true"
     script:
         # publish dist rpms to F5 CDN into $VERSION directory
         # install jq
