@@ -32,12 +32,13 @@ find . ! -name .git -delete
 cd ../../../
 cp -R ./src ./release/github/f5-bigip-runtime-init/
 cp -R ./examples ./release/github/f5-bigip-runtime-init/
+cp -R ./diagrams ./release/github/f5-bigip-runtime-init/
 cp .gitignore ./release/github/f5-bigip-runtime-init/
 cp package.json ./release/github/f5-bigip-runtime-init/
 cp package-lock.json ./release/github/f5-bigip-runtime-init/
 cp README.md ./release/github/f5-bigip-runtime-init/
 cp tsconfig.json ./release/github/f5-bigip-runtime-init/
-
+rm -rf .git
 cd ./release/github/f5-bigip-runtime-init/
 pwd
 ls -la
