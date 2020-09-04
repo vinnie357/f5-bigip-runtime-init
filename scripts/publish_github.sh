@@ -38,13 +38,12 @@ cp package.json ./release/github/f5-bigip-runtime-init/
 cp package-lock.json ./release/github/f5-bigip-runtime-init/
 cp README.md ./release/github/f5-bigip-runtime-init/
 cp tsconfig.json ./release/github/f5-bigip-runtime-init/
-rm -rf .git
 cd ./release/github/f5-bigip-runtime-init/
 pwd
 ls -la
+git remote rm origin && git remote add origin git@github.com:f5devcentral/f5-bigip-runtime-init.git
 git status
 git add -f .
 git commit -m "Release commited to $CI_COMMIT_REF_NAME tag" || echo "No changes, nothing to commit!"
-git remote rm origin && git remote add origin git@github.com:f5devcentral/f5-bigip-runtime-init.git
 git push -f origin HEAD:develop
 
