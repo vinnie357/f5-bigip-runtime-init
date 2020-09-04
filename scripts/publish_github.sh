@@ -34,7 +34,6 @@ echo "Setting git origin"
 git remote rm origin && git remote add origin git@github.com:f5devcentral/f5-bigip-runtime-init.git
 echo "Removing everything from git"
 git rm -rf .
-git rm -rf node_modules
 
 echo "Adding allowed directories"
 for dir in "${ALLOWED_DIRS[@]}"; do
