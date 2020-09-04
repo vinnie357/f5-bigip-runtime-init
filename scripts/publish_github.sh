@@ -25,8 +25,8 @@ git config user.name $GITLAB_USER_LOGIN
 git config user.email $GITLAB_USER_EMAIL
 ######################
 
-RELEASE_VERSION=$(echo $VERSION | awk -F"-" '{ print $2 }')
-RELEASE_BUILD=$(echo $VERSION | awk -F"-" '{ print $3 }')
+RELEASE_VERSION=$(echo $CI_COMMIT_REF_NAME | awk -F"-" '{ print $2 }')
+RELEASE_BUILD=$(echo $CI_COMMIT_REF_NAME | awk -F"-" '{ print $3 }')
 ALLOWED_DIRS=(src examples diagrams)
 ALLOWED_FILES=(.gitignore .gitallowed package.json package-lock.json README.md tsconfig.json)
 
@@ -47,10 +47,13 @@ for file in "${ALLOWED_FILES[@]}"; do
     git add ${file}
 done
 
+echo "Committing source code"
 git status
-git commit -m "Release commited to $CI_COMMIT_REF_NAME tag" || echo "No changes, nothing to commit!"
+git commit -m "Release commited to $RELEASE_VERSION tag" || echo "No changes, nothing to commit!"
 git push -f origin HEAD:develop
 
+echo "Publishing tag"
+git tag -d $(git tag -l)
 git tag -a $RELEASE_VERSION -m "Release of version $RELEASE_VERSION"
 git push --tags
 
