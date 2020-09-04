@@ -27,7 +27,7 @@ echo "Cloning projects"
 mkdir -p ./release/github/ && cd ./release/github/
 git clone git@github.com:f5devcentral/f5-bigip-runtime-init.git
 echo 'Completed cloning github repo'
-cd ./f5-bigip-runtime-init.git
+cd ./f5-bigip-runtime-init
 echo 'DEBUG CHECKING'
 ls -la
 echo 'DEBUG '
