@@ -1,18 +1,6 @@
 #!/usr/bin/env bash
 
 
-# Script is to be used during release time to process github release
-# run script passing the following arguments:
-if [ -z "$1" ]
-then
-    echo 'Git tag parameter is required'
-    exit 1;
-fi
-
-GIT_TAG=$1
-echo "RELEASE TAG: $GIT_TAG"
-
-
 ######################
 echo "Configuring SSH"
 eval $(ssh-agent -s)
@@ -60,8 +48,12 @@ git push --tags
 
 echo "Creating release"
 git config --global github.token $GIT_HUB_API_TOKEN_AK
+
+echo "Getting release info"
+release_description=$(curl --header "PRIVATE-TOKEN: $GITLAB_PRIVATE_TOKEN_AK" "https://gitlab.example.com/api/v4/projects/24/releases/$CI_COMMIT_REF_NAME" | jq .description)
+
 version=$RELEASE_VERSION
-text="$CI_COMMIT_MESSAGE"
+text="This is test Release for Runtime Init"
 
 generate_post_data()
 {
@@ -70,7 +62,7 @@ generate_post_data()
   "tag_name": "$version",
   "target_commitish": "develop",
   "name": "$version",
-  "body": "$text",
+  "body": "$release_description",
   "draft": false,
   "prerelease": false
 }

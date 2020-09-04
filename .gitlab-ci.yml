@@ -689,8 +689,11 @@ publish_to_github:
     only:
       - /(^release-(\d+\.){1,2}(\d)-(\d+)?$)/
     script:
+        # install jq
+        - apt-get update
+        - apt-get install -y jq
         # Execute Relaese script to push source to github repo
-        - ./scripts/publish_github.sh $CI_COMMIT_REF_NAME
+        - ./scripts/publish_github.sh
 
 trigger_downstream_templates_tests:
     stage: release_trigger_template_tests
