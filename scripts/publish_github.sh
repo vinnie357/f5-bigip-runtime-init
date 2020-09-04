@@ -39,6 +39,7 @@ cp README.md ./release/github/f5-bigip-runtime-init/
 cp tsconfig.json ./release/github/f5-bigip-runtime-init/
 
 cd ./release/github/f5-bigip-runtime-init/
+pwd
 ls -la
 git status
 git add -f .
