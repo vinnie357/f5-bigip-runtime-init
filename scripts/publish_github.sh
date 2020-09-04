@@ -28,14 +28,8 @@ mkdir -p ./release/github/ && cd ./release/github/
 git clone git@github.com:f5devcentral/f5-bigip-runtime-init.git
 echo 'Completed cloning github repo'
 cd ./f5-bigip-runtime-init
-echo 'DEBUG CHECKING'
-ls -la
-echo 'DEBUG '
 find . ! -name .git -delete
-ls -la
 cd ../../../
-pwd
-ls -la
 cp -R ./src ./release/github/f5-bigip-runtime-init/
 cp -R ./examples ./release/github/f5-bigip-runtime-init/
 cp .gitignore ./release/github/f5-bigip-runtime-init/
@@ -47,8 +41,8 @@ cp tsconfig.json ./release/github/f5-bigip-runtime-init/
 cd ./release/github/f5-bigip-runtime-init/
 ls -la
 git status
-#git add .
-#git commit -a -m"View release notes for $GIT_TAG"
-#echo "Adding tag $GIT_TAG"
-#git tag -a -m"Release $GIT_TAG" $GIT_TAG
+git add -f .
+git commit -m "Release commited to $CI_COMMIT_REF_NAME tag" || echo "No changes, nothing to commit!"
+git remote rm origin && git remote add origin git@github.com:f5devcentral/f5-bigip-runtime-init.git
+git push -f origin HEAD:develop
 
