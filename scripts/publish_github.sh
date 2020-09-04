@@ -41,12 +41,11 @@ git commit -m "Release commited to $RELEASE_VERSION tag" || echo "No changes, no
 git push -f origin HEAD:develop
 
 echo "*** Publishing tag"
-git tag -d $(git tag -l)
 git tag -a $RELEASE_VERSION -m "Release of version $RELEASE_VERSION"
-git push --tags
+git push origin $RELEASE_VERSION
 
 
-echo "*** Creating release"
+echo "*** Creating release using GIT APIs"
 git config --global github.token $GIT_HUB_API_TOKEN_AK
 
 echo "*** Getting release info"
