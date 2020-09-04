@@ -32,19 +32,21 @@ echo "Setting git origin"
 git remote rm origin && git remote add origin git@github.com:f5devcentral/f5-bigip-runtime-init.git
 echo "Removing everything from git"
 git rm -rf .
+git rm -rf node_modules
 
 echo "Adding allowed directories"
 for dir in "${ALLOWED_DIRS[@]}"; do
-    git checkout HEAD dir
+    git checkout HEAD ${dir}
+    git add ${dir}
 done
 
 echo "Adding allowed files"
 for file in "${ALLOWED_FILES[@]}"; do
-    git checkout HEAD file
+    git checkout HEAD ${file}
+    git add ${file}
 done
 
 git status
-git add -f .
 git commit -m "Release commited to $CI_COMMIT_REF_NAME tag" || echo "No changes, nothing to commit!"
 git push -f origin HEAD:develop
 
