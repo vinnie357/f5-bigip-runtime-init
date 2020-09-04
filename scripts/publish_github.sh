@@ -25,6 +25,8 @@ git config user.name $GITLAB_USER_LOGIN
 git config user.email $GITLAB_USER_EMAIL
 ######################
 
+RELEASE_VERSION=$(echo $VERSION | awk -F"-" '{ print $2 }')
+RELEASE_BUILD=$(echo $VERSION | awk -F"-" '{ print $3 }')
 ALLOWED_DIRS=(src examples diagrams)
 ALLOWED_FILES=(.gitignore .gitallowed package.json package-lock.json README.md tsconfig.json)
 
@@ -49,4 +51,7 @@ done
 git status
 git commit -m "Release commited to $CI_COMMIT_REF_NAME tag" || echo "No changes, nothing to commit!"
 git push -f origin HEAD:develop
+
+git tag -a $RELEASE_VERSION -m "Release of version $RELEASE_VERSION"
+git push --tags
 
