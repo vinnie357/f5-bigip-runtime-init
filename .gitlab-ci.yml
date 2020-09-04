@@ -8,9 +8,8 @@ stages:
     - functional_test_init
     - functional_test_execute
     - functional_test_cleanup
-    - publish
-    - release_publish_github
-    - release_template_tests
+    - release_publish
+    - release_trigger_template_tests
 
 .helpers: &helpers |
     function validate () {
@@ -653,13 +652,9 @@ publish_rpms_dev_cdn:
         - cm-official-docker-executor
 
 publish_rpms_cdn:
-    stage: publish
+    stage: release_publish
     only:
-        refs:
-            - /(^release-(\d+\.){1,2}(\d)-(\d+)?$)/
-        variables:
-            - $PUBLISH_RPM == "true"
-            - $CI_COMMIT_MESSAGE =~ /smart:run_publish_cdn/
+        - /(^release-(\d+\.){1,2}(\d)-(\d+)?$)/
     except:
         variables:
             #- $CI_COMMIT_REF_NAME != "master"  --uncomment
@@ -689,7 +684,7 @@ publish_rpms_cdn:
 
 
 publish_to_github:
-    stage: release_publish_github
+    stage: release_publish
     only:
       - /(^release-(\d+\.){1,2}(\d)-(\d+)?$)/
     script:
@@ -698,7 +693,7 @@ publish_to_github:
 
 
 trigger_downstream_templates_tests:
-    stage: release_template_tests
+    stage: release_trigger_template_tests
     only:
       - /(^release-(\d+\.){1,2}(\d)-(\d+)?$)/
     variables:
