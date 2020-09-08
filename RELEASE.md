@@ -11,8 +11,9 @@ The release is fully automated process; however it requires a few manual steps t
 
 Before triggering release pipeline, the following needs to be done as a part of pre-release activities
 
-   1. Create Merge Request (aka MR) to merge changes from `develop` to `master` branch
-   2. After merging changes to `master` branch, use pre-configured schedules to trigger functional tests against `master` branch:
+   1. Update `version` and `release` values under package.json
+   2. Create Merge Request (aka MR) to merge changes from `develop` to `master` branch
+   3. After merging changes to `master` branch, use pre-configured schedules to trigger functional tests against `master` branch:
       * There a few environment variables which are used for triggering functional tests for different clouds as well as BIGIP versions:
          - BIGIP_VERSION - specifies BIGIP version used in testing; possible values (14, 15 or all)
          - TEST_SUITE - specifies Public Cloud against which functional testing will be done; possilbe values ( aws, azure, gcp or all). 
